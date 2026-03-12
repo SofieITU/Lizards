@@ -3,12 +3,10 @@
 
 #### Overview
 
-This is a template repository for the "Projects in Data Science" course. You should use this repository for your project.
+This is the final project repository for group Lizzards in the "Projects in Data Science" course at IT University of Copenhagen, with the following contributors: [placeholder], [placeholder], [placeholder], [placeholder], [placeholder].
 
-If using github.itu.dk, you need to download the repository and make your own. 
-
-If you are using general Github, you can clone or fork the repository directly. 
-
+The goal of our project is [placeholder]...  
+ 
 Your repository MUST be named 2026-PDS-XX where XX is your group name (e.g. 2026-PDS-Pandas). 
 
 #### Python environment
