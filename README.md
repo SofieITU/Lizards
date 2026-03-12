@@ -1,4 +1,4 @@
-# Projects in Data Science (2026)
+# Projects in Data Science (2026) - Lizzards
 ![unnamed](https://github.com/user-attachments/assets/134ff216-6cb9-44fd-af1b-7b25ef04fa5a)
 
 #### Overview
