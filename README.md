@@ -1,4 +1,5 @@
 # Projects in Data Science (2026)
+![unnamed](https://github.com/user-attachments/assets/134ff216-6cb9-44fd-af1b-7b25ef04fa5a)
 
 #### Overview
 
