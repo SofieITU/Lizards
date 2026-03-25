@@ -66,7 +66,7 @@ def extract_features(row, data_path=data_path):
 
     return feats
 
-features_df = pd.DataFrame(sampled_dfs.apply(extract_features, axis=1).to_list())
+features_df = pd.DataFrame(df.apply(extract_features, axis=1).to_list())
 
 # Colleting all the features together in one dataframe
 features_df.to_csv('features.csv', index = False)
