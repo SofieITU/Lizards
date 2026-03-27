@@ -43,6 +43,10 @@ def load_image_and_mask(image_id, data_path=data_path):
     
     return im, mask
 
+import pandas as pd
+df = pd.read_csv('data/metadata_with_group.csv')
+df.head()
+
 def extract_features(row, data_path=data_path):
 
     img_id = row["img_id"]
@@ -54,7 +58,7 @@ def extract_features(row, data_path=data_path):
     # using the implementations for asymmetry and compactness defined earlier (this is just for the purpose of the example, this doesn't mean you have to use these. remember you are supposed to understand and improve them)
     asymmetry = get_asymmetry(mask) # quick question: what would happen to this value if there was no mask for the lesion selected?
     compactness = get_compactness(mask)
-    color = ...
+    color = ... # add name of function
 
     # compute your features
     feats = {
