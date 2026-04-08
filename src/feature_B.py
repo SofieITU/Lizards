@@ -1,3 +1,6 @@
+import numpy as np
+from skimage import morphology
+
 def compactness_score(mask):
     '''Computes a compactness score for the given mask.
     The score is based of the Polsby-Popper measure.
