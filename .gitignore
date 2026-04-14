@@ -1,4 +1,5 @@
-data/
+data/imgs/
+data/masks/
 metadata_with_group.csv
 test.ipynb
 __pycache__/
