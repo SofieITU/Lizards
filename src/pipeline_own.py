@@ -33,18 +33,21 @@ class Picture:
         return self.clean_image
 # ------------------
 def process_single_image(row_data):
-    """This is an optimisation solution, multiprocessing. One CPU core will run this for one image."""
+    """This is an optimisation solution, multiprocessing. One CPU core per image."""
     img_id = row_data["img_id"]
     diagnostic = row_data["diagnostic"]
     
     img = Picture(img_id)
-    
+    img_clean = img.clean_picture()
+
     # Calculate features
     feature_dict = {
         "ID": img.input_ID,
         "Asymmetry": feature_A.get_asymmetry(img.mask_img),
         "Border": feature_B.compactness_score(img.mask_img),
-        "[Color placeholder]": "placeholder",
+        "HSV_Hue_Variance": feature_C.hsv_var(img_clean,img.mask_img)[0],
+        "HSV_Saturation_Variance": feature_C.hsv_var(img_clean,img.mask_img)[1],
+        "HSV_Value_Variance": feature_C.hsv_var(img_clean,img.mask_img)[2],
         "Cancerous": 1 if diagnostic in {"BCC", "MEL", "SCC"} else 0
     }
     return feature_dict
@@ -58,24 +61,27 @@ if __name__ == "__main__":
     # # Getting all the unique IMG IDs 
     df = pd.read_csv("adjacent_metadata_small.csv")
 
-    for _, row in df.iterrows():
-        img = Picture(row["img_id"])
-        
-        rows.append({
-            "ID": img.input_ID,
-            "Asymmetry": feature_A.get_asymmetry(img.mask_img),
-            "Border": feature_B.compactness_score(img.mask_img),
-            "[Color placeholder]": "placeholder",
-            "Cancerous": 1 if row["diagnostic"] in cancerous else 0
-        })
+    # for _, row in df.iterrows():
+    #     img = Picture(row["img_id"])
+    #     img_clean = img.clean_picture()
 
-    # tasks = df.to_dict('records')
-    # with concurrent.futures.ProcessPoolExecutor() as executor:
-    #     # The executor maps the worker function to every task in the list simultaneously
-    #     results_list = list(executor.map(process_single_image, tasks))
-    # features = pd.DataFrame(results_list)
+    #     rows.append({
+    #         "ID": img.input_ID,
+    #         "Asymmetry": feature_A.get_asymmetry(img.mask_img),
+    #         "Border": feature_B.compactness_score(img.mask_img),
+    #         "HSV_Hue_Variance": feature_C.hsv_var(img_clean,img.mask_img)[0],
+    #         "HSV_Saturation_Variance": feature_C.hsv_var(img_clean,img.mask_img)[1],
+    #         "HSV_Value_Variance": feature_C.hsv_var(img_clean,img.mask_img)[2],
+    #         "Cancerous": 1 if row["diagnostic"] in cancerous else 0
+    #     })
 
-    features = pd.DataFrame(rows)
+    tasks = df.to_dict('records')
+    with concurrent.futures.ProcessPoolExecutor() as executor:
+        # The executor maps the worker function to every task in the list simultaneously
+        results_list = list(executor.map(process_single_image, tasks))
+    features = pd.DataFrame(results_list)
+
+    #features = pd.DataFrame(rows)
     features.to_csv("../data/features.csv")
     end = time.time()
     print(features)
