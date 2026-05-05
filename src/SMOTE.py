@@ -1,7 +1,6 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 from imblearn.over_sampling import SMOTE
-from sklearn.preprocessing import StandardScaler
 
 df = pd.read_csv('2026-PDS-Lizards\\data\\features.csv', index_col=0)  # Insert own path to features.csv
 
