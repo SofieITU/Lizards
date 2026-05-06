@@ -1,3 +1,5 @@
+# Code taken from exercise notebook
+
 import cv2
 def removeHair(img_org, img_gray, kernel_size=5, threshold=10, radius=3):
 
