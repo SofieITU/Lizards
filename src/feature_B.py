@@ -1,3 +1,5 @@
+# This code was taken from the TA's solution
+
 import numpy as np
 from skimage import morphology
 from math import pi
